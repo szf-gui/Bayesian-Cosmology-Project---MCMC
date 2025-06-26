@@ -1,0 +1,98 @@
+# Configuration for a combined analysis of Planck 2018, DESI DR2 BAO, and Pantheon+ SN Ia.
+
+# Likelihoods
+likelihood:
+  # Planck 2018 data
+  planck_2018_highl_plik.TTTEEE_lite_native:
+  planck_2018_lowl.TT:
+  planck_2018_lowl.EE:
+  planck_2018_lensing.native:
+  
+  # DESI DR2 BAO data
+  bao.desi_dr2.desi_bao_all:
+
+  # Pantheon+ Supernovae data
+  sn.pantheonplus:
+    use_abs_mag: True
+
+# Theory code: CAMB
+theory:
+  camb:
+    extra_args:
+      halofit_version: 'mead'
+      bbn_predictor: BBN_2017_Av
+      AccuracyBoost: 1
+      lSampleBoost: 1
+      lAccuracyBoost: 1
+
+# Parameters for the base Lambda-CDM model with TIGHTER PRIORS for the combined run
+params:
+  # Priors are now centered around the known Planck 2018 best-fit values
+  ombh2:
+    prior:
+      min: 0.020
+      max: 0.025
+    ref: 0.0224
+    proposal: 0.0001
+    latex: \Omega_b h^2
+  omch2:
+    prior:
+      min: 0.10
+      max: 0.14
+    ref: 0.12
+    proposal: 0.001
+    latex: \Omega_c h^2
+  H0:
+    prior:
+      min: 60
+      max: 75
+    ref: 67.5
+    proposal: 0.5
+    latex: H_0
+  tau:
+    prior:
+      min: 0.02
+      max: 0.09
+    ref: 0.055
+    proposal: 0.006
+    latex: \tau
+  ns:
+    prior:
+      min: 0.92
+      max: 1.0
+    ref: 0.965
+    proposal: 0.004
+    latex: n_s
+  As:
+    value: 'lambda logA: 1e-10*np.exp(logA)'
+    latex: A_s
+  logA:
+    prior:
+      min: 3.0
+      max: 3.1
+    ref: 3.045
+    proposal: 0.001
+    latex: '\log(10^{10} A_s)'
+
+  # Nuisance parameter for Pantheon+
+  Mb:
+    prior:
+      min: -20
+      max: -18
+    latex: M_b
+
+  # Nuisance parameter for Planck
+  A_planck:
+    value: 1.0
+    latex: A_\mathrm{planck}
+
+# Sampler: MCMC
+sampler:
+  mcmc:
+    burn_in: 3000
+    max_samples: 30000
+    Rminus1_stop: 0.01
+    Rminus1_cl_stop: 0.05
+
+# Output: Define a new name for the combined chain
+output: chains/combined_planck_desi_sn

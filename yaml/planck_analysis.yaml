@@ -1,0 +1,66 @@
+theory:
+  camb:
+
+likelihood:
+  # Use the native 'lite' version to avoid clik dependency
+  planck_2018_highl_plik.TTTEEE_lite_native:
+  # These low-l likelihoods already have native implementations by default
+  planck_2018_lowl.TT:
+  planck_2018_lowl.EE:
+  planck_2018_lensing.native:
+
+params:
+  # Cosmological parameters to vary, with their priors
+  ombh2:
+    prior:
+      min: 0.02
+      max: 0.025
+    ref: 0.022
+    proposal: 0.0001
+    latex: \Omega_\mathrm{b} h^2
+  omch2:
+    prior:
+      min: 0.1
+      max: 0.14
+    ref: 0.12
+    proposal: 0.001
+    latex: \Omega_\mathrm{c} h^2
+  H0:
+    prior:
+      min: 50
+      max: 80
+    ref: 67
+    proposal: 0.5
+    latex: H_0
+  tau:
+    prior:
+      min: 0.03
+      max: 0.08
+    ref: 0.054
+    proposal: 0.005
+    latex: \tau
+  As:
+    prior:
+      min: 1.5e-9
+      max: 2.5e-9
+    ref: 2.1e-9
+    proposal: 1.e-11
+    latex: A_\mathrm{s}
+  ns:
+    prior:
+      min: 0.9
+      max: 1.0
+    ref: 0.965
+    proposal: 0.005
+    latex: n_\mathrm{s}
+
+sampler:
+  mcmc:
+    # Basic MCMC settings
+    max_samples: 1000000 # Increase for better convergence
+    Rminus1_stop: 0.01 # Convergence criterion for stopping the chain
+    learn_proposal_Rminus1_max_early: 0.002 # New name for Rminus1_target (how early the proposal learns)
+    burn_in: 0.3 # New name for burn_in_fraction (can be fraction or number of samples)
+    max_tries: 10000
+
+output: planck_chains_native

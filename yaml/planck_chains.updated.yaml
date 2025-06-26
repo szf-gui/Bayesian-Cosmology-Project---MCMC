@@ -1,0 +1,153 @@
+theory:
+  camb:
+    version: null
+    path: null
+    speed: 0.3
+    stop_at_error: false
+    extra_args: null
+    ignore_obsolete: false
+    use_renames: false
+    external_primordial_pk: false
+    renames:
+      omegabh2: ombh2
+      omegach2: omch2
+      omegal: omega_de
+      omegak: omk
+      yhe: YHe
+      yheused: YHe
+      YpBBN: Y_p
+likelihood:
+  planck_2018_highl_plik.TTTEEE_lite:
+    path: null
+    clik_file: baseline/plc_3.0/hi_l/plik_lite/plik_lite_v22_TTTEEE.clik
+    product_id: '151902'
+    aliases:
+    - plikHM_TTTEEE
+    speed: 500
+    type: CMB
+    stop_at_error: false
+    version: null
+  planck_2018_lowl.TT:
+    lmin: 2
+    lmax: 29
+    type: CMB
+    aliases:
+    - lowT
+    speed: -1
+    stop_at_error: false
+    version: null
+  planck_2018_lowl.EE:
+    type: CMB
+    aliases:
+    - lowE
+    speed: -1
+    stop_at_error: false
+    version: null
+  planck_2018_lensing.native:
+    path: null
+    dataset_file: lensing/2018/smicadx12_Dec5_ftl_mv2_ndclpp_p_teb_consext8.dataset
+    dataset_params: null
+    l_max: null
+    aliases:
+    - lensing
+    speed: 50
+    type: CMB
+    map_separator: x
+    stop_at_error: false
+    version: null
+params:
+  ombh2:
+    prior:
+      min: 0.02
+      max: 0.025
+    ref: 0.022
+    proposal: 0.0001
+    latex: \Omega_\mathrm{b} h^2
+    renames:
+    - omegabh2
+  omch2:
+    prior:
+      min: 0.1
+      max: 0.14
+    ref: 0.12
+    proposal: 0.001
+    latex: \Omega_\mathrm{c} h^2
+    renames:
+    - omegach2
+  H0:
+    prior:
+      min: 50
+      max: 80
+    ref: 67
+    proposal: 0.5
+    latex: H_0
+  tau:
+    prior:
+      min: 0.03
+      max: 0.08
+    ref: 0.054
+    proposal: 0.005
+    latex: \tau
+  As:
+    prior:
+      min: 1.5e-09
+      max: 2.5e-09
+    ref: 2.1e-09
+    proposal: 1.0e-11
+    latex: A_\mathrm{s}
+  ns:
+    prior:
+      min: 0.9
+      max: 1.0
+    ref: 0.965
+    proposal: 0.005
+    latex: n_\mathrm{s}
+  A_planck:
+    prior:
+      dist: norm
+      loc: 1
+      scale: 0.0025
+    ref:
+      dist: norm
+      loc: 1
+      scale: 0.002
+    proposal: 0.0005
+    latex: y_\mathrm{cal}
+    renames: calPlanck
+  chi2__CMB:
+    latex: \chi^2_\mathrm{CMB}
+    derived: true
+sampler:
+  mcmc:
+    burn_in: 0.3
+    max_tries: 10000
+    covmat: null
+    covmat_params: null
+    proposal_scale: 2.4
+    output_every: 60s
+    learn_every: 40d
+    temperature: 1
+    learn_proposal: true
+    learn_proposal_Rminus1_max: 2.0
+    learn_proposal_Rminus1_max_early: 0.002
+    learn_proposal_Rminus1_min: 0.0
+    max_samples: 1000000
+    Rminus1_stop: 0.01
+    Rminus1_cl_stop: 0.2
+    Rminus1_cl_level: 0.95
+    Rminus1_single_split: 4
+    measure_speeds: true
+    oversample_power: 0.4
+    oversample_thin: true
+    drag: false
+    blocking: null
+    callback_function: null
+    callback_every: null
+    seed: null
+    check_every: null
+    oversample: null
+    drag_limits: null
+    fallback_covmat_scale: 4
+    version: null
+output: planck_chains
+version: 3.5.7

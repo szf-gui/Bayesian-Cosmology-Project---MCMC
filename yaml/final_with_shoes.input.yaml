@@ -1,0 +1,79 @@
+theory:
+  camb:
+    extra_args:
+      halofit_version: mead
+      bbn_predictor: BBN_2017_Av
+      AccuracyBoost: 1
+      lSampleBoost: 1
+      lAccuracyBoost: 1
+likelihood:
+  planck_2018_highl_plik.TTTEEE_lite_native: null
+  planck_2018_lowl.TT: null
+  planck_2018_lowl.EE: null
+  planck_2018_lensing.native: null
+  bao.desi_dr2.desi_bao_all: null
+  sn.pantheonplus:
+    use_abs_mag: true
+params:
+  ombh2:
+    prior:
+      min: 0.02
+      max: 0.025
+    ref: 0.0224
+    proposal: 0.0001
+    latex: \Omega_b h^2
+  omch2:
+    prior:
+      min: 0.1
+      max: 0.14
+    ref: 0.12
+    proposal: 0.001
+    latex: \Omega_c h^2
+  H0:
+    prior:
+      dist: norm
+      loc: 73.04
+      scale: 1.04
+    ref: 70
+    proposal: 0.5
+    latex: H_0
+  tau:
+    prior:
+      min: 0.02
+      max: 0.09
+    ref: 0.055
+    proposal: 0.006
+    latex: \tau
+  ns:
+    prior:
+      min: 0.92
+      max: 1.0
+    ref: 0.965
+    proposal: 0.004
+    latex: n_s
+  As:
+    value: 'lambda logA: 1e-10*np.exp(logA)'
+    latex: A_s
+  logA:
+    prior:
+      min: 3.0
+      max: 3.1
+    ref: 3.045
+    proposal: 0.001
+    latex: \log(10^{10} A_s)
+  Mb:
+    prior:
+      min: -20
+      max: -18
+    ref: -19.4
+    latex: M_b
+  A_planck:
+    value: 1.0
+    latex: A_\mathrm{planck}
+sampler:
+  mcmc:
+    burn_in: 3000
+    max_samples: 30000
+    Rminus1_stop: 0.01
+    Rminus1_cl_stop: 0.05
+output: final_with_shoes

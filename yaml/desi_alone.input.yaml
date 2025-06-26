@@ -1,0 +1,41 @@
+theory:
+  camb: {}
+likelihood:
+  bao.desi_dr2.desi_bao_all: null
+params:
+  omch2:
+    prior:
+      min: 0.05
+      max: 0.25
+    latex: \Omega_c h^2
+  H0:
+    prior:
+      min: 50
+      max: 90
+    latex: H_0
+  ombh2:
+    prior:
+      min: 0.02
+      max: 0.025
+    latex: \Omega_b h^2
+  tau:
+    prior:
+      min: 0.01
+      max: 0.8
+    latex: \tau
+  ns:
+    prior:
+      min: 0.8
+      max: 1.2
+    latex: n_s
+  As:
+    value: 'lambda logA: 1e-10*np.exp(logA)'
+    latex: A_s
+  logA:
+    prior:
+      min: 2
+      max: 4
+    latex: \log(10^{10} A_s)
+sampler:
+  mcmc: {}
+output: desi_alone

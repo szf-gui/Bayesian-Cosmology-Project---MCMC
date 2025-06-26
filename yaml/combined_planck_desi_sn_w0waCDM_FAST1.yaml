@@ -1,0 +1,67 @@
+# Filename: combined_planck_desi_sn_w0waCDM_FAST1.yaml
+# Corrected for Cobaya v3.5.7 with wider dark energy priors.
+
+theory:
+  camb:
+
+likelihood:
+  planck_2018_highl_plik.TTTEEE_lite_native:
+  planck_2018_lowl.TT:
+  planck_2018_lowl.EE:
+  planck_2018_lensing.native:
+  bao.desi_dr2.desi_bao_all:
+  sn.pantheonplus:
+    use_abs_mag: True
+
+params:
+  ombh2:
+    prior: {min: 0.02, max: 0.025}
+    proposal: 0.0001
+    latex: \Omega_\mathrm{b} h^2
+  omch2:
+    prior: {min: 0.1, max: 0.14}
+    proposal: 0.001
+    latex: \Omega_\mathrm{c} h^2
+  H0:
+    prior: {min: 50, max: 80}
+    proposal: 0.5
+    latex: H_0
+  tau:
+    prior: {min: 0.03, max: 0.08}
+    proposal: 0.005
+    latex: \tau
+  As:
+    prior: {min: 1.5e-9, max: 2.5e-9}
+    proposal: 1.e-11
+    latex: A_\mathrm{s}
+  ns:
+    prior: {min: 0.9, max: 1.0}
+    proposal: 0.005
+    latex: n_\mathrm{s}
+    
+  # Dark energy parameters with WIDER PRIORS as requested
+  w:
+    prior: {min: -3.0, max: 0.0}
+    proposal: 0.05
+    latex: w
+  wa:
+    prior: {min: -3.0, max: 3.0}
+    proposal: 0.1
+    latex: w_a
+    
+  # Nuisance parameters
+  A_planck:
+    value: 1.0
+    latex: A_\mathrm{Planck}
+  Mb:
+    prior: {min: -20, max: -18}
+    latex: M_b
+
+sampler:
+  mcmc:
+    Rminus1_stop: 0.05
+    burn_in: 0.3
+    max_tries: 10000
+
+# NEW UNIQUE OUTPUT NAME as requested
+output: chains/combined_planck_desi_sn_w0waCDM_FAST1

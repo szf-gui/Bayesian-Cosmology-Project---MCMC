@@ -1,0 +1,75 @@
+# Final analysis: Planck + DESI + Pantheon+ + SH0ES H0 Prior
+
+likelihood:
+  # Planck 2018 data
+  planck_2018_highl_plik.TTTEEE_lite_native:
+  planck_2018_lowl.TT:
+  planck_2018_lowl.EE:
+  planck_2018_lensing.native:
+  
+  # DESI DR2 BAO data
+  bao.desi_dr2.desi_bao_all:
+
+  # Pantheon+ Supernovae data
+  sn.pantheonplus:
+    use_abs_mag: True
+
+  # The SH0ES result as a direct Gaussian prior on H0
+  likelihood.gaussian_prior:
+    params: [H0]
+    mean: 73.04
+    std: 1.04
+
+theory:
+  camb:
+    extra_args:
+      halofit_version: 'mead'
+      bbn_predictor: BBN_2017_Av
+      AccuracyBoost: 1
+      lSampleBoost: 1
+      lAccuracyBoost: 1
+
+params:
+  # Using tight priors but no 'ref' point to let cobaya find a valid start.
+  ombh2:
+    prior: {min: 0.020, max: 0.025}
+    proposal: 0.0001
+    latex: \Omega_b h^2
+  omch2:
+    prior: {min: 0.10, max: 0.14}
+    proposal: 0.001
+    latex: \Omega_c h^2
+  H0:
+    prior: {dist: norm, loc: 73.04, scale: 1.04}
+    proposal: 0.5
+    latex: H_0
+  tau:
+    prior: {min: 0.02, max: 0.09}
+    proposal: 0.006
+    latex: \tau
+  ns:
+    prior: {min: 0.92, max: 1.0}
+    proposal: 0.004
+    latex: n_s
+  As:
+    value: 'lambda logA: 1e-10*np.exp(logA)'
+    latex: A_s
+  logA:
+    prior: {min: 3.0, max: 3.1}
+    proposal: 0.001
+    latex: '\log(10^{10} A_s)'
+  Mb:
+    prior: {min: -20, max: -18}
+    latex: M_b
+  A_planck:
+    value: 1.0
+    latex: A_\mathrm{planck}
+
+sampler:
+  mcmc:
+    burn_in: 3000
+    max_samples: 30000
+    Rminus1_stop: 0.01
+    Rminus1_cl_stop: 0.05
+
+output: chains/final_with_shoes
